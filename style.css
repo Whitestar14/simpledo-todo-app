@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Geist Mono';
+  src: url(./GeistMonoVF.woff2);
+}
+
 :root {
   /* Samsung-inspired color palette */
   --background-dark: #121212;
@@ -39,7 +44,7 @@
   scrollbar-width: thin;
   scrollbar-color: var(--surface-dark) transparent;
   transition: all 0.3s ease;
-  font-family: "Reddit Mono";
+  font-family: "Geist Mono";
 }
 
 body {
