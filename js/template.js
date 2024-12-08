@@ -1,7 +1,13 @@
 const template = `
     <header>
-      <h1>SimpleDo Tasks</h1>
-      <div class="search-filter">
+    <nav class="navigation">
+    <div class="header-title">
+    <h1>SimpleDo Tasks</h1>
+    </div>
+    <div class="theme-icon" id="theme-icon"><a class="fas"></a>
+    </div>
+    </nav>
+    <div class="search-filter">
         <input type="text" class="search-input" placeholder="Search tasks..." />
 
         <div class="filters">
@@ -63,7 +69,7 @@ const template = `
       <!-- Add modal for task editing -->
 <div id="editTaskModal" class="modal">
   <div class="modal-content">
-    <span class="close-modal">&times;</span>
+    <span class="close-modal fas fa-x"></span>
     <h2>Edit Task</h2>
     <form id="editTaskForm">
       <input type="hidden" id="editTaskId" name="taskId" />
@@ -105,11 +111,10 @@ const template = `
   </div>
 </div>
 
-<!-- Add modal for adding subtasks -->
 <!-- Add subtask modal -->
 <div id="subtaskModal" class="modal">
   <div class="modal-content">
-    <span class="close-modal-subtask">&times;</span>
+    <span class="close-modal-subtask fas fa-x"></span>
     <h2>Add Subtask</h2>
     <form id="subtaskForm">
       <input type="hidden" id="subtaskParentId" name="parentTaskId" />
@@ -123,6 +128,8 @@ const template = `
 </div>
 
     </main>
+
+    <script defer src="js/theme.js"></script>
   `;
 
 export default template;

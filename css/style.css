@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Geist Mono';
-  src: url(./GeistMonoVF.woff2);
+  font-family: 'mono';
+  src: url(../webfonts/GeistMonoVF.woff2);
 }
 
 :root {
@@ -37,14 +37,28 @@
   --box-shadow-sm: 0 0 0 2px rgba(66, 133, 244, 0.2);
 }
 
+:root[data-theme="light"] {
+  --background-dark: #f5f5f5;
+  --surface-dark: #ffffff;
+  --surface-light: #000000d0;
+  --primary-dark: #488de7;
+  --error-dark: #f0675b;
+
+  --text-primary-dark: #474747;
+  --text-secondary-dark: #646464;
+
+  --elevation-1: rgba(0, 0, 0, 0.05);
+  --elevation-2: rgba(0, 0, 0, 0.1);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: var(--surface-dark) transparent;
-  transition: all 0.3s ease;
-  font-family: "Geist Mono";
+  font-family: "mono", Consolas, monospace;
+  transition: all 0.1s ease;
 }
 
 body {
@@ -81,11 +95,29 @@ header {
   box-shadow: var(--box-shadow);
 }
 
+header .navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--margin);
+  gap: var(--gap-lg);
+}
+
+header .theme-icon a {
+  border: none;
+  font-size: 0.875rem;
+  background: var(--elevation-1);
+  color: var(--text-primary-dark);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
 header h1 {
   text-align: center;
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: var(--margin);
 }
 
 header .search-filter {
@@ -230,8 +262,6 @@ header .search-filter .filters {
 
 /* The main taskList interface */
 #taskList {
-  display: grid;
-  gap: var(--gap-lg);
   margin-top: var(--margin);
 }
 
@@ -240,7 +270,7 @@ header .search-filter .filters {
   border-radius: var(--border-radius-lg);
   padding: var(--padding-lg);
   box-shadow: var(--box-shadow);
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, background-color 0.1s ease;
 }
 
 .task:hover {
@@ -406,35 +436,38 @@ subtask-checkbox:checked::after {
   place-items: center;
 }
 
-#subtaskModal .modal-content {
-  max-width: 500px;
-  top:50%;
-  left: 50%;
-  translate: -50% -50%;
-}
-
 .modal-content {
   background: var(--surface-dark);
   border-radius: var(--border-radius-lg);
-  position: relative;
-  padding: 20px;
   box-shadow: var(--box-shadow-lg);
-  width: 90%;
-  margin: var(--margin);
+  padding: calc(var(--padding-lg) - 0.25rem);
+  animation: fadeIn 0.3s ease;
   max-width: 500px;
+  place-items: center;
+  margin: var(--margin);
+  position: relative;
+  width: 90%;
 }
 
-.close-modal, .close-modal-subtask {
+.close-modal,
+.close-modal-subtask {
   color: #aaa;
-  font-size: 28px;
+  font-size: 1rem;
   position: absolute;
-  right: 10%;
-  top: 2.5%;
+  top: 5%;
+  right: 7.5%;
   font-weight: bold;
   cursor: pointer;
 }
 
-.close-modal:hover, .close-modal-subtask:hover {
+.close-modal-subtask {
+  right: 7.5%;
+  top: 15%;
+}
+
+
+.close-modal:hover,
+.close-modal-subtask:hover {
   color: var(--surface-light);
 }
 
@@ -494,7 +527,8 @@ subtask-checkbox:checked::after {
   margin-right: 10px;
 }
 
-.remove-subtask, .delete-subtask {
+.remove-subtask,
+.delete-subtask {
   border: none;
   color: var(--text-primary-dark);
   padding: 0.1rem 0.5rem;

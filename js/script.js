@@ -1,4 +1,4 @@
-import template from "/template.js";
+import template from "./template.js";
 
 const STORAGE_KEY = "tasks";
 const SELECTORS = {
@@ -32,7 +32,11 @@ let tasks = (() => {
 
 const renderPage = () => {
   // Add a fallback to prevent complete document loss
-  document.body.innerHTML = template || "<div>Error rendering page</div>";
+  if (template) {
+    document.body.innerHTML = template;
+  } else {
+    document.body.innerHTML = "<div>Error rendering page</div>";
+  }
 
   setupEditModalListeners();
   setupSubtaskModalListeners();
@@ -434,7 +438,7 @@ const addSubtask = (taskId) => {
 
   const modal = document.getElementById("subtaskModal");
   document.getElementById("subtaskParentId").value = taskId;
-  modal.style.display = "block";
+  modal.style.display = "grid";
 };
 
 // Add this to your setupEventListeners function
@@ -479,7 +483,7 @@ const escapeHtml = (str) => {
 };
 
 const setupEventListeners = (elements) => {
-  const { list, completedBtn } = elements;
+  const { list, completedBtn, input } = elements;
 
   list.addEventListener("click", (e) => {
     const taskElement = e.target.closest(".task");
@@ -503,6 +507,7 @@ const setupEventListeners = (elements) => {
       deleteSubtask(taskId, subtaskIndex);
     }
   });
+
   document.querySelector(SELECTORS.addBtn).addEventListener("click", addTask);
 
   document
@@ -512,8 +517,15 @@ const setupEventListeners = (elements) => {
         addTask();
       }
     });
+
   completedBtn.addEventListener("click", () => {
     tasks = tasks.filter((task) => !task.completed);
     renderTasks();
   });
+
+  input.onkeydown = (e) => {
+    if (e.key === "Enter") {
+      addTask();
+    }
+  };
 };
