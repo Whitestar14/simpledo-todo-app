@@ -1,4 +1,4 @@
-import template from "./template.js";
+import template from "../js/template.min.js";
 
 const STORAGE_KEY = "tasks";
 const SELECTORS = {
